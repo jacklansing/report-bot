@@ -1,8 +1,8 @@
 import { Guild } from 'discord.js';
-const ALLOWED_GUILDS = ['Razor Hill'];
+import config from './guildsConfig';
 
 export default (guild: Guild) => {
-  if (ALLOWED_GUILDS.findIndex((name) => name === guild.name) === -1) {
+  if (config.allowedGuilds.findIndex((name) => name === guild.name) === -1) {
     guild.leave();
   }
 };

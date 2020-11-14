@@ -31,8 +31,6 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
       await new PlayerModel({
         username: targetUser,
         reports: [report],
-        createdAt: new Date(),
-        updatedAt: new Date(),
       }).save();
     }
   } catch (e) {

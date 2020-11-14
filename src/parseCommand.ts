@@ -1,6 +1,7 @@
-const report = require('./commands/report');
+import { Message } from 'discord.js';
+import report from './commands/report';
 
-module.exports = (message) => {
+export default (message: Message) => {
   const messageContent = message.content;
   const msgArray = messageContent.split(' ');
   const command = msgArray[0];

@@ -1,18 +1,26 @@
 {
-  "name": "discord-bot",
-  "version": "1.0.0",
+  "name": "gw-report-discord-bot",
+  "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn node src/main",
-    "dev": "yarn nodemon src/main"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "node dist/main.js",
+    "dev": "nodemon dist/main.js",
+    "test": "jest",
+    "clean": "rm -r dist/"
   },
   "dependencies": {
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.6.3"
+    "mongoose": "^5.10.14",
+    "ts-node": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "@types/mongoose": "^5.10.0",
+    "@types/ws": "^7.4.0",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.0.5"
   }
 }

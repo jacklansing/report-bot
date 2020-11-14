@@ -1,5 +1,5 @@
 {
-  "name": "gw-report-discord-bot",
+  "name": "player-report-discord-bot",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",

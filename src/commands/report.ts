@@ -8,8 +8,6 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
   const targetDescription = getDescription(msgArray);
   const author = originalMessage.author;
 
-  const embed = getReportEmbed(originalMessage, targetUser, targetDescription);
-
   let report: IPlayerReport = {
     targetDescription,
     createdAt: new Date(),
@@ -20,13 +18,15 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
     },
   };
 
+  // If player has been reported before, add to their existing reports.
+  // Otherwise we'll add them with the current report as their first.
   try {
-    const userExists: IPlayerDocument | null = await PlayerModel.findOne({
+    const playerExists: IPlayerDocument | null = await PlayerModel.findOne({
       username: targetUser,
     });
-    if (userExists) {
-      userExists.reports.push(report);
-      await userExists.save();
+    if (playerExists) {
+      playerExists.reports.push(report);
+      await playerExists.save();
     } else {
       await new PlayerModel({
         username: targetUser,
@@ -39,6 +39,8 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
     console.log('error saving report', e);
   }
 
+  // Create embed message for reply
+  const embed = getReportEmbed(originalMessage, targetUser, targetDescription);
   originalMessage.channel.send(embed);
 };
 

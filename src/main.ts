@@ -14,10 +14,15 @@ async function main() {
   });
 
   client.on('guildCreate', (guild) => {
+    /* If guild is not in the list of allowed discord guilds, the
+    bot will automatically leave the guild if they somehow received an
+    invite link and used it. */
     verifyGuild(guild);
   });
 
   client.on('message', (message) => {
+    // All commands will start with an exclamation point.
+    // If the message does not start with !, we will not process it any further.
     if (message.content[0] !== '!') return;
     parseCommand(message);
   });

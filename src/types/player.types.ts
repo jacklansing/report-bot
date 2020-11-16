@@ -16,5 +16,6 @@ export interface IPlayerReport {
     id: string | number;
     username: string;
     avatarURL: string | null | undefined;
+    guildName: string;
   };
 }

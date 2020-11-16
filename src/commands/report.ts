@@ -15,6 +15,7 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
       id: author.id,
       username: author.username,
       avatarURL: author.avatarURL(),
+      guildName: originalMessage.guild!.name,
     },
   };
 

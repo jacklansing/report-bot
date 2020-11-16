@@ -13,6 +13,7 @@ const playerSchema = new Schema(
             id: String,
             username: String,
             avatarURL: String,
+            guildName: String,
           },
         },
         { timestamps: true },

@@ -4,13 +4,12 @@ import PlayerModel from '../models/player';
 import { IPlayerDocument, IPlayerReport } from '../types/player.types';
 
 const report = async (originalMessage: Message, msgArray: string[]) => {
-  const [, targetUser] = msgArray;
+  const [, targetPlayer] = msgArray;
   const targetDescription = getDescription(msgArray);
   const author = originalMessage.author;
 
   let report: IPlayerReport = {
     targetDescription,
-    createdAt: new Date(),
     reportedBy: {
       id: author.id,
       username: author.username,
@@ -23,14 +22,14 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
   // Otherwise we'll add them with the current report as their first.
   try {
     const playerExists: IPlayerDocument | null = await PlayerModel.findOne({
-      username: targetUser,
+      username: targetPlayer,
     });
     if (playerExists) {
       playerExists.reports.push(report);
       await playerExists.save();
     } else {
       await new PlayerModel({
-        username: targetUser,
+        username: targetPlayer,
         reports: [report],
       }).save();
     }
@@ -39,7 +38,11 @@ const report = async (originalMessage: Message, msgArray: string[]) => {
   }
 
   // Create embed message for reply
-  const embed = getReportEmbed(originalMessage, targetUser, targetDescription);
+  const embed = getReportEmbed(
+    originalMessage,
+    targetPlayer,
+    targetDescription,
+  );
   originalMessage.channel.send(embed);
 };
 

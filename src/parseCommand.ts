@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 import report from './commands/report';
+import reportYoutube from './commands/report-youtube';
 
 export default (message: Message) => {
   const messageContent = message.content;
@@ -11,6 +12,9 @@ export default (message: Message) => {
   switch (command) {
     case '!report':
       report(message, msgArray);
+      break;
+    case '!report-youtube':
+      reportYoutube(message, msgArray);
       break;
     default:
       console.log('Commands were parsed but no commands were run');

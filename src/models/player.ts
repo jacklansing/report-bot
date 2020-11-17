@@ -1,6 +1,16 @@
 import mongoose, { Schema } from 'mongoose';
 import { IPlayerDocument } from '../types/player.types';
 
+const reportedBySchema = new Schema(
+  {
+    id: String,
+    username: String,
+    avatarURL: String,
+    guildName: String,
+  },
+  { timestamps: true },
+);
+
 const playerSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
@@ -9,12 +19,16 @@ const playerSchema = new Schema(
         {
           targetDescription: { type: String, required: true },
           createdAt: Date,
-          reportedBy: {
-            id: String,
-            username: String,
-            avatarURL: String,
-            guildName: String,
-          },
+          reportedBy: reportedBySchema,
+        },
+        { timestamps: true },
+      ),
+    ],
+    youtubeReports: [
+      new Schema(
+        {
+          youtubeURL: { type: String, required: true },
+          reportedBy: reportedBySchema,
         },
         { timestamps: true },
       ),

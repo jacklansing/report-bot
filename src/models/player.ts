@@ -56,4 +56,18 @@ playerSchema.pre('save', function (next) {
   next();
 });
 
+playerSchema.pre('find', function (next) {
+  // @ts-ignore
+  const conditions = this._conditions;
+  conditions.username = conditions.username.toLowerCase();
+  next();
+});
+
+playerSchema.pre('findOne', function (next) {
+  // @ts-ignore
+  const conditions = this._conditions;
+  conditions.username = conditions.username.toLowerCase();
+  next();
+});
+
 export default mongoose.model<IPlayerDocument>('Player', playerSchema);

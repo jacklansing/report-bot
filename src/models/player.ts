@@ -33,8 +33,27 @@ const playerSchema = new Schema(
         { timestamps: true },
       ),
     ],
+    heroReports: {
+      type: Map,
+      default: {},
+      of: {
+        reports: [
+          {
+            heroDescription: { type: String, required: true },
+            reportedBy: reportedBySchema,
+          },
+        ],
+      },
+    },
   },
   { timestamps: true },
 );
+
+playerSchema.pre('save', function (next) {
+  const player = this;
+  // @ts-ignore
+  player.username = player.username.toLowerCase();
+  next();
+});
 
 export default mongoose.model<IPlayerDocument>('Player', playerSchema);

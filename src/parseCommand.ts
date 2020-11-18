@@ -1,6 +1,7 @@
 import { Message } from 'discord.js';
 import report from './commands/report';
 import reportYoutube from './commands/report-youtube';
+import reportHero from './commands/report-hero';
 
 export default (message: Message) => {
   const messageContent = message.content;
@@ -15,6 +16,9 @@ export default (message: Message) => {
       break;
     case '!report-youtube':
       reportYoutube(message, msgArray);
+      break;
+    case '!report-hero':
+      reportHero(message, msgArray);
       break;
     default:
       console.log('Commands were parsed but no commands were run');

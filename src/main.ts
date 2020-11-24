@@ -23,7 +23,7 @@ async function main() {
   client.on('message', (message) => {
     // All commands will start with an exclamation point.
     // If the message does not start with !, we will not process it any further.
-    if (message.content[0] !== '!') return;
+    if (message.content[0] !== '_') return;
     parseCommand(message);
   });
 

@@ -13,19 +13,19 @@ export default (message: Message) => {
   const command = msgArray[0];
 
   switch (command) {
-    case '!report':
+    case '_report':
       report(message, msgArray);
       break;
-    case '!report-youtube':
+    case '_report-youtube':
       reportYoutube(message, msgArray);
       break;
-    case '!report-hero':
+    case '_report-hero':
       reportHero(message, msgArray);
       break;
-    case '!info':
+    case '_info':
       info(message, msgArray);
       break;
-    case '!info-hero':
+    case '_info-hero':
       infoHero(message, msgArray);
       break;
     default:

@@ -1,5 +1,6 @@
 import Discord, { Message } from 'discord.js';
-import { IPlayerHeroReport } from 'src/types/player.types';
+import { IPlayerHeroReport } from '../types/player.types';
+import formatHeroName from '../utils/formatHeroName';
 import PlayerModel from '../models/player';
 import ReportHeroSchema from '../utils/validation/reportHeroSchema';
 
@@ -8,11 +9,7 @@ export default async (originalMessage: Message, msgArray: string[]) => {
 
   const heroDescription = desc.join(' ');
 
-  const formattedHeroName = heroName
-    .split('_')
-    .map((s) => s[0].toUpperCase() + s.slice(1).toLowerCase())
-    .join(' ')
-    .trim();
+  const formattedHeroName = formatHeroName(heroName);
 
   try {
     await ReportHeroSchema.validate(
@@ -20,7 +17,7 @@ export default async (originalMessage: Message, msgArray: string[]) => {
       { abortEarly: false },
     );
   } catch (e) {
-    originalMessage.channel.send(
+    return originalMessage.channel.send(
       `There was an error with your report: \n  > ${e.errors.join(' \n > ')}`,
     );
   }
@@ -67,7 +64,7 @@ export default async (originalMessage: Message, msgArray: string[]) => {
     heroDescription,
   );
 
-  originalMessage.channel.send(embed);
+  return originalMessage.channel.send(embed);
 };
 
 const getHeroReportEmbed = (

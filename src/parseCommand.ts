@@ -29,7 +29,7 @@ export default (message: Message) => {
     originalMessage: message,
     msgArray,
   };
-  6;
+
   let cursor = 1;
 
   while (cursor < msgArray.length - 1) {

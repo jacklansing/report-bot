@@ -4,7 +4,7 @@ import reportYoutube from './commands/report-youtube';
 import reportHero from './commands/report-hero';
 import info from './commands/info';
 import infoHero from './commands/info-hero';
-import { FLAG_PREFIX } from './config';
+import { COMMAND_PRFEIX, FLAG_PREFIX } from './config';
 
 export interface ICommand {
   type: string;
@@ -29,7 +29,7 @@ export default (message: Message) => {
     originalMessage: message,
     msgArray,
   };
-
+  6;
   let cursor = 1;
 
   while (cursor < msgArray.length - 1) {
@@ -45,19 +45,19 @@ export default (message: Message) => {
   }
 
   switch (command.type) {
-    case '_report':
+    case COMMAND_PRFEIX + 'report':
       report(command);
       break;
-    case '_report-youtube':
+    case COMMAND_PRFEIX + 'report-youtube':
       reportYoutube(command);
       break;
-    case '_report-hero':
+    case COMMAND_PRFEIX + 'report-hero':
       reportHero(command);
       break;
-    case '_info':
+    case COMMAND_PRFEIX + 'info':
       info(command);
       break;
-    case '_info-hero':
+    case COMMAND_PRFEIX + 'info-hero':
       infoHero(command);
       break;
     default:

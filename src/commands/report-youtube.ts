@@ -2,8 +2,10 @@ import Discord, { Message } from 'discord.js';
 import ReportYoutubeSchema from '../utils/validation/reportYoutubeSchema';
 import PlayerModel from '../models/player';
 import { IPlayerYoutubeReport } from '../types/player.types';
+import { ICommand } from 'src/parseCommand';
 
-export default async (originalMessage: Message, msgArray: string[]) => {
+export default async (command: ICommand) => {
+  const { originalMessage, msgArray } = command;
   const [, targetPlayer, youtubeURL] = msgArray;
 
   try {
@@ -12,7 +14,7 @@ export default async (originalMessage: Message, msgArray: string[]) => {
       { abortEarly: false },
     );
   } catch (e) {
-    originalMessage.channel.send(
+    return originalMessage.channel.send(
       `There was an error with your report: \n  > ${e.errors.join(' \n > ')}`,
     );
   }
@@ -47,7 +49,7 @@ export default async (originalMessage: Message, msgArray: string[]) => {
     targetPlayer,
     youtubeURL,
   );
-  originalMessage.channel.send(embed);
+  return originalMessage.channel.send(embed);
 };
 
 const getYoutubeReportEmbed = (

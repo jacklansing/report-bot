@@ -1,10 +1,12 @@
-import Discord, { Message } from 'discord.js';
+import Discord from 'discord.js';
 import { IPlayerHeroReport } from '../types/player.types';
 import formatHeroName from '../utils/formatHeroName';
 import PlayerModel from '../models/player';
 import ReportHeroSchema from '../utils/validation/reportHeroSchema';
+import { ICommand } from '../parseCommand';
 
-export default async (originalMessage: Message, msgArray: string[]) => {
+export default async (command: ICommand) => {
+  const { originalMessage, msgArray } = command;
   const [, targetPlayer, heroName, ...desc] = msgArray;
 
   const heroDescription = desc.join(' ');

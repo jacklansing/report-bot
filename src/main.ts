@@ -3,6 +3,7 @@ import Discord from 'discord.js';
 import parseCommand from './parseCommand';
 import verifyGuild from './utils/verifyGuild';
 import createDbConnection from './utils/createDbConnection';
+import { COMMAND_PRFEIX } from './config';
 
 async function main() {
   const client = new Discord.Client();
@@ -23,7 +24,7 @@ async function main() {
   client.on('message', (message) => {
     // All commands will start with an exclamation point.
     // If the message does not start with !, we will not process it any further.
-    if (message.content[0] !== '_') return;
+    if (message.content[0] !== COMMAND_PRFEIX) return;
     parseCommand(message);
   });
 

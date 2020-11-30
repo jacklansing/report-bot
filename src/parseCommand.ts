@@ -4,29 +4,61 @@ import reportYoutube from './commands/report-youtube';
 import reportHero from './commands/report-hero';
 import info from './commands/info';
 import infoHero from './commands/info-hero';
+import { FLAG_PREFIX } from './config';
+
+export interface ICommand {
+  type: string;
+  flags: ICommandFlag[];
+  originalMessage: Message;
+  msgArray: string[];
+}
+
+export interface ICommandFlag {
+  flag: string;
+  argument: string;
+}
 
 export default (message: Message) => {
   const messageContent = message.content;
   const msgArray = messageContent.split(' ');
 
   // Command should be first value when splitting apart message
-  const command = msgArray[0];
+  const command: ICommand = {
+    type: msgArray[0],
+    flags: [],
+    originalMessage: message,
+    msgArray,
+  };
 
-  switch (command) {
+  let cursor = 1;
+
+  while (cursor < msgArray.length - 1) {
+    let currentMsg = msgArray[cursor];
+    if (currentMsg.startsWith(FLAG_PREFIX)) {
+      command.flags.push({
+        flag: currentMsg.slice(FLAG_PREFIX.length),
+        argument: msgArray[++cursor],
+      });
+    }
+    cursor++;
+    continue;
+  }
+
+  switch (command.type) {
     case '_report':
-      report(message, msgArray);
+      report(command);
       break;
     case '_report-youtube':
-      reportYoutube(message, msgArray);
+      reportYoutube(command);
       break;
     case '_report-hero':
-      reportHero(message, msgArray);
+      reportHero(command);
       break;
     case '_info':
-      info(message, msgArray);
+      info(command);
       break;
     case '_info-hero':
-      infoHero(message, msgArray);
+      infoHero(command);
       break;
     default:
       console.log('Commands were parsed but no commands were run');

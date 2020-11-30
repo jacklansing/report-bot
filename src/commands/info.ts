@@ -1,11 +1,15 @@
 import Discord, { Message } from 'discord.js';
+import { ICommand } from '../parseCommand';
 import PlayerModel from '../models/player';
 
-const info = async (originalMessage: Message, msgArray: string[]) => {
+const info = async (command: ICommand) => {
+  const { originalMessage, msgArray } = command;
   const [, targetPlayer] = msgArray;
   const targetPlayerData = await PlayerModel.findOne({
     username: targetPlayer,
   });
+
+  //TODO: Validate input
 
   if (!targetPlayerData) {
     return originalMessage.channel.send(

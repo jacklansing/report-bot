@@ -2,8 +2,10 @@ import { Message } from 'discord.js';
 import Discord from 'discord.js';
 import PlayerModel from '../models/player';
 import { IPlayerDocument, IPlayerReport } from '../types/player.types';
+import { ICommand } from 'src/parseCommand';
 
-const report = async (originalMessage: Message, msgArray: string[]) => {
+const report = async (command: ICommand) => {
+  const { originalMessage, msgArray } = command;
   const [, targetPlayer] = msgArray;
   const targetDescription = getDescription(msgArray);
   const author = originalMessage.author;

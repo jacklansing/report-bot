@@ -24,7 +24,7 @@ export default (message: Message) => {
 
   // Command should be first value when splitting apart message
   const command: ICommand = {
-    type: msgArray[0],
+    type: msgArray[0].slice(COMMAND_PRFEIX.length),
     flags: [],
     originalMessage: message,
     msgArray,
@@ -45,19 +45,19 @@ export default (message: Message) => {
   }
 
   switch (command.type) {
-    case COMMAND_PRFEIX + 'report':
+    case 'report':
       report(command);
       break;
-    case COMMAND_PRFEIX + 'report-youtube':
+    case 'report-youtube':
       reportYoutube(command);
       break;
-    case COMMAND_PRFEIX + 'report-hero':
+    case 'report-hero':
       reportHero(command);
       break;
-    case COMMAND_PRFEIX + 'info':
+    case 'info':
       info(command);
       break;
-    case COMMAND_PRFEIX + 'info-hero':
+    case 'info-hero':
       infoHero(command);
       break;
     default:

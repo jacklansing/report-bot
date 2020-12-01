@@ -37,7 +37,8 @@ export default (message: Message) => {
     if (currentMsg.startsWith(FLAG_PREFIX)) {
       command.flags.push({
         flag: currentMsg.slice(FLAG_PREFIX.length),
-        argument: msgArray[++cursor],
+        // Spaces are joined by underscores when usin a flag
+        argument: msgArray[++cursor].split('_').join(' '),
       });
     }
     cursor++;

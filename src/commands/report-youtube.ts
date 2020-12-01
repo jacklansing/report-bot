@@ -23,6 +23,7 @@ export default async (command: ICommand) => {
   let report: IPlayerYoutubeReport = {
     youtubeURL,
     reportedBy: {
+      discord_id: author.id,
       username: author.username,
       avatarURL: author.avatarURL(),
       guildName: originalMessage.guild!.name,

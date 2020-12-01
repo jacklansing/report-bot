@@ -3,7 +3,7 @@ import { IPlayerDocument } from '../types/player.types';
 
 const reportedBySchema = new Schema(
   {
-    id: String,
+    discord_id: String,
     username: String,
     avatarURL: String,
     guildName: String,

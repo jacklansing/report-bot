@@ -1,4 +1,4 @@
-import Discord from 'discord.js';
+import Discord, { Message } from 'discord.js';
 import { IPlayerHeroReport } from '../types/player.types';
 import formatHeroName from '../utils/formatHeroName';
 import PlayerModel from '../models/player';
@@ -29,7 +29,7 @@ export default async (command: ICommand) => {
   let report: IPlayerHeroReport = {
     heroDescription,
     reportedBy: {
-      id: author.id,
+      discord_id: author.id,
       username: author.username,
       avatarURL: author.avatarURL(),
       guildName: originalMessage.guild!.name,

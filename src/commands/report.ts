@@ -13,7 +13,7 @@ const report = async (command: ICommand) => {
   let report: IPlayerReport = {
     targetDescription,
     reportedBy: {
-      id: author.id,
+      discord_id: author.id,
       username: author.username,
       avatarURL: author.avatarURL(),
       guildName: originalMessage.guild!.name,

@@ -31,7 +31,7 @@ export interface IPlayerHeroReport {
 }
 
 export interface IReportedBy {
-  id?: string;
+  discord_id?: string;
   username: string;
   avatarURL: string | null | undefined;
   guildName: string;
